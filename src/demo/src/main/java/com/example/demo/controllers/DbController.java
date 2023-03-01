@@ -46,13 +46,13 @@ public class DbController {
 
     @RequestMapping(path="/{millis}", method=RequestMethod.GET)
     public String get(@PathVariable Integer millis) {
-        log.info("Get: {}", millis);
+        log.info("db GET: {}", millis);
         return process(millis);
     }
     
     @RequestMapping(method=RequestMethod.GET)
     public String get() {
-        log.info("Get");
+        log.info("db GET");
         return process(0);
     }
 }
