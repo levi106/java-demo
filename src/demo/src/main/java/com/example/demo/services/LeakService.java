@@ -16,8 +16,22 @@ public class LeakService {
     Runtime runtime = Runtime.getRuntime();
     NumberFormat format = NumberFormat.getInstance();
 
-    @Job(name="Memory leak job")
-    public void executeMemoryLeakJob(int interval, int size) {
+    @Job(name="Memory leak job - OneShot")
+    public void executeMemoryLeakJob(int size) {
+        log.info("Execute memory leak job");
+        log.info("Add {} bytes to the queue.", size);
+        long maxMemory = runtime.maxMemory();
+        long totalMemory = runtime.totalMemory();
+        long freeMemory = runtime.freeMemory();
+        log.info("max memory: {}", format.format(maxMemory / 1024));
+        log.info("total memory: {}", format.format(totalMemory / 1024));
+        log.info("free memory: {}", format.format(freeMemory / 1024));
+        log.info("total free memory: {}", format.format((freeMemory + (maxMemory - totalMemory)) / 1024));
+        queue.add(new byte[size]);
+    }
+
+    @Job(name="Memory leak job - Repeat")
+    public void executeMemoryLeakJob(int size, int interval) {
         log.info("Execute memory leak job");
         while (true) {
             log.info("Add {} bytes to the queue.", size);
