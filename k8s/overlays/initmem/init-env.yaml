@@ -9,11 +9,11 @@ spec:
       - name: myapp
         env:
         - name: APP_INITIAL_MEMORY_ALLOCATION
-          value: "2097152"
+          value: "26214400"
         resources:
           requests:
-            memory: "300"
+            memory: "300Mi"
             cpu: "100m"
           limits:
-            memory: "300"
+            memory: "300Mi"
             cpu: "500m"
