@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-demo
+spec:
+  template:
+    spec:
+      containers:
+      - name: myapp
+        env:
+        - name: APP_JOB_LEAK_ENABLED
+          value: "true"
+        resources:
+          requests:
+            memory: "512"
+            cpu: "100m"
+          limits:
+            memory: "512"
+            cpu: "500m"
